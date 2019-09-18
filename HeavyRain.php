@@ -14,19 +14,24 @@ class HeavyRain extends CityBuilder
         $city   = $rand ? $this->randomCity() : $this->staticCity();
         $result = 0;
         $leftBorder = 0;
+        
+        $city = [1, 2, 1, 5, 2, 4, 1, 0, 1, 2, 6, 4, 5, 2, 3, 4, 1, 2];
 
-        /* add your code here */
+        for ($j = 0; $j < count($city); $j++)
+        {
+            $waterPoolSize = 0;
+            $left = $city[$j-1];
+            $right = $city[$j+1];
 
-        for ($j = 0; $j < count($city); $j++) {
-            $waterSize = 0;
-            $left = max(array_slice($city, 0, $j));
-            $right = max(array_slice($city, $j));
-            echo $city[$j]."\n";
+            echo "block : ".$city[$j]."\n";
             echo "left : ".$left."\n";
             echo "right : ".$right."\n";
-            echo "end\n";
-        }
+            echo "end\n\n";
 
+            // $city[$j] taille du batiment courant
+            // $left taille du batiment a gauche
+            // $right taille du batiment a droite
+        }
         echo json_encode($city) . " => " . $result . "\n";
     }
 }
