@@ -15,7 +15,7 @@ class HeavyRain extends CityBuilder
         $result = 0;
         $leftBorder = 0;
         
-        $city = [1, 2, 1, 5, 2, 4, 1, 0, 1, 2, 6, 4, 5, 2, 3, 4, 1, 2];
+        $city = [1,8,2,5,8,9];
 
         for ($j = 0; $j < count($city); $j++)
         {
@@ -26,11 +26,21 @@ class HeavyRain extends CityBuilder
             echo "block : ".$city[$j]."\n";
             echo "left : ".$left."\n";
             echo "right : ".$right."\n";
-            echo "end\n\n";
 
             if ($left > $city[$j] && $right > $city[$j]) {
-                $result += min($left, $right);
+                echo "WATER !!! \n";
+                $min = min([$left, $right]);
+                echo "min : ".$min."\n";
+                $water = $min-$city[$j];
+                echo "water : ".$water."\n";
+                if ($left > $water) {
+                    echo "new water : ".$left - ($water+$city[$j])."\n";
+                    $water += $left - ($water+$city[$j]);
+                }
+
+                $result += $water;
             }
+            echo "end\n\n";
 
             // $city[$j] taille du batiment courant
             // $left taille du batiment a gauche
