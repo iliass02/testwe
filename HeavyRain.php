@@ -28,6 +28,10 @@ class HeavyRain extends CityBuilder
             echo "right : ".$right."\n";
             echo "end\n\n";
 
+            if ($left > $city[$j] && $right > $city[$j]) {
+                $result += min($left, $right);
+            }
+
             // $city[$j] taille du batiment courant
             // $left taille du batiment a gauche
             // $right taille du batiment a droite
