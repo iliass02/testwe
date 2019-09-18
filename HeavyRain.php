@@ -14,8 +14,6 @@ class HeavyRain extends CityBuilder
         $city   = $rand ? $this->randomCity() : $this->staticCity();
         $result = 0;
         $leftBorder = 0;
-        
-        $city = [1,8,2,5,8,9];
 
         for ($j = 0; $j < count($city); $j++)
         {
@@ -34,7 +32,7 @@ class HeavyRain extends CityBuilder
                 $water = $min-$city[$j];
                 echo "water : ".$water."\n";
                 if ($left > $water) {
-                    echo "new water : ".$left - ($water+$city[$j])."\n";
+                    // echo "new water : ".$left - ($water+$city[$j])."\n";
                     $water += $left - ($water+$city[$j]);
                 }
 
