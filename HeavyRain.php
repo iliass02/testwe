@@ -15,34 +15,30 @@ class HeavyRain extends CityBuilder
         $result = 0;
         $leftBorder = 0;
 
+        $prev = 0;
+        $next = $city[1];
+
         for ($j = 0; $j < count($city); $j++)
         {
-            $waterPoolSize = 0;
-            $left = $city[$j-1];
-            $right = $city[$j+1];
-
-            echo "block : ".$city[$j]."\n";
-            echo "left : ".$left."\n";
-            echo "right : ".$right."\n";
-
-            if ($left > $city[$j] && $right > $city[$j]) {
-                echo "WATER !!! \n";
-                $min = min([$left, $right]);
-                echo "min : ".$min."\n";
+            $current = $city[$j];
+            $water = 0;
+            if ($prev > $city[$j] && $next > $city[$j]) {
+                $min = min([$prev, $next]);
                 $water = $min-$city[$j];
-                echo "water : ".$water."\n";
-                if ($left > $water) {
-                    // echo "new water : ".$left - ($water+$city[$j])."\n";
-                    $water += $left - ($water+$city[$j]);
-                }
 
+                if ($prev > $water) {
+                    $value = $prev-($water+$city[$j]);
+                    $water += $prev - ($water+$city[$j]);
+                }
                 $result += $water;
             }
-            echo "end\n\n";
+            else if ($prev > $city[$j] && $next < $city[$j]) {
+                $water = $prev - $current;
+                $result += $water;
+            }
 
-            // $city[$j] taille du batiment courant
-            // $left taille du batiment a gauche
-            // $right taille du batiment a droite
+            $prev = $water + $city[$j];
+            $next = $city[$j+2];
         }
         echo json_encode($city) . " => " . $result . "\n";
     }
